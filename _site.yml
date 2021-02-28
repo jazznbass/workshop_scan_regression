@@ -1,0 +1,8 @@
+name: "Workshop single-case regression analyses"
+output_dir: "docs"  
+navbar:
+  title: "Workshop scan regression"
+  right:
+    - text: "Requirements"
+      href: requirements.html
+
