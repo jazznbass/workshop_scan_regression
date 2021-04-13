@@ -4,6 +4,6 @@ title: "About"
 
 **Jürgen Wilbert** is a professor of researchmethods and diagnostics at the department of inclusive education, University of Potsdam, Germany. He published more than 50 peer-reviewed papers and 20 book chapters, a book on motivation and one on [single-case analyses](https://github.com/jazznbass/scan-Book), and he created two R packages ([scan](https://github.com/jazznbass/scan) and [scaledic](https://github.com/jazznbass/scaledic)). Click [here](https://jazznbass.github.io/homepage/) for more information.
 
-**Timo Lüke** is a professor of inclusive education at the Institut für Bildungsforschung und PädagogInnenbildung, Karl-Franzens-University Graz, Austria
+**Timo Lüke** is a professor of inclusive education at the *Institut für Bildungsforschung und PädagogInnenbildung, Karl-Franzens-University Graz, Austria*
 
 Both are chief editors of the journal "Empirische Sonderpädagogik" the leading German Journal on special education research.

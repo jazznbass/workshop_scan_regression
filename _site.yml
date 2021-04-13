@@ -5,10 +5,6 @@ navbar:
   right:
     - text: "Requirements"
       href: requirements.html
-    - text: "Content"
-      href: content.html
-    - text: "Materials"
-      href: materials.html
     - text: "About"
       href: about.html
 output:

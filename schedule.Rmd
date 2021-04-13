@@ -1,0 +1,14 @@
+---
+title: Schedule
+---
+
+1. A basic single-case regression model
+2. Multiple phase change models
+3. Those darn contrasts ...
+4. Understanding regression coefficients
+5. Extending the regression model
+6. Multivariate models
+7. Multilevel models
+8. Cross-level predictors
+
+

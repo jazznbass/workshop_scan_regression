@@ -1,0 +1,233 @@
+---
+title: "Workshop Single-Case Regression Analyses"
+company: "University of Potsdam"
+author: "Jürgen Wilbert"
+date: "`r paste0('Version: ', format(Sys.time(), '%d %B %Y'), '<br><br>- arrow keys: move through slides <br>- f: toggle full-screen')`"
+output:
+  ioslides_presentation: 
+    css: styles_slides.css
+    logo: images/ZEIF.png
+    widescreen: yes
+    df_print: kable
+    fig_width: 6
+    fig_height: 4
+  html_document: default
+  beamer_presentation: default
+  slidy_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(scan)
+```
+
+# A basic model
+
+
+## Step 1: The intercept
+
+```{r figure_plm_intercept, echo = FALSE, fig.height=4, fig.width=6}
+ex <- scdf(c(A = 1,1,1,1,1,1,1,1,1,1, B = 1,1,1,1,1,1,1,1,1,1), name = "")
+plot(ex, ylim = c(0,12))
+mtext("Intercept", side = 1, adj = 0, at = -0.04, line = -2, col = "blue", font = 3)
+```
+
+$y_i = \beta_0$ 
+
+## Step 2: Trend effect
+
+```{r figure_trend, echo = FALSE, fig.height=4, fig.width=6}
+ex <- scdf(seq(from = 0.1, by = 0.1, length = 20), name = "", phase.design = c(A = 10, B = 10))
+plot(ex, ylim = c(0,12))
+mtext("trend effect", side = 1, adj = 0, at = 0.15, line = -2.5, col = "blue", font = 3)
+
+```
+
+$y_i = \beta_1 MT_i$ 
+
+## Step 3: Level effect
+
+```{r figure_level, echo = FALSE, fig.height=4, fig.width=6}
+ex <- scdf(c(rep(0, 10), rep(5,10)), name = "", phase.design = c(A = 10, B = 10))
+plot(ex, ylim = c(0,12))
+mtext("level effect", side = 1, adj = 0, at = 0.4, line = -3.7, col = "blue", font = 3)
+```
+
+$y_i = \beta_2 Phase_i$ 
+
+## Step 4: Slope effect
+
+```{r figure_slope, echo = FALSE, fig.height=4, fig.width=6}
+ex <- scdf(c(rep(0, 10), seq(by = 0.5, length = 10)), name = "", phase.design = c(A = 10, B = 10))
+plot(ex, ylim = c(0,12))
+mtext("slope effect", side = 1, adj = 0, at = 0.6, line = -10, col = "blue", font = 3)
+```
+
+$y_i = \beta_3 (MT_i-\sigma) \times Phase_i$  
+$\sigma$ := MT at which Phase B starts minus one (Berry & Lewis-Beck)  
+------  Alternative: $\sigma$ := MT at which Phase B starts (Huitema & McKean)  
+
+
+## Step 5: Error/Residual
+
+```{r figure_error, echo = FALSE, fig.height=4, fig.width=6}
+set.seed(1334)
+ex <- scdf(rnorm(20, sd = 1), name = "", phase.design = c(A = 10, B = 10))
+plot(ex, ylim = c(-6,6))
+mtext("error/residuals", side = 1, adj = 0, at = 0.2, line = -12, col = "blue", font = 3)
+```
+
+$y_i = \epsilon_i$  
+
+
+## The basic model
+
+```{r figure_plm, echo = FALSE, fig.height=4, fig.width=6}
+ex <- scdf(c(A = 1,3,3,4,2,3,4,5,4, 4, B = 8,7,8,9,9,7,11,10,10,13), name = "")
+plot(ex, lines = list("trend", col = c("red", "blue"), lwd = 3))
+mtext("Intercept", side = 1, adj = 0, at = -0.04, line = -2, col = "blue", font = 3)
+mtext("level effect", side = 1, adj = 0, at = 0.4, line = -3.7, col = "blue", font = 3)
+mtext("slope effect", side = 1, adj = 0, at = 0.6, line = -10, col = "blue", font = 3)
+mtext("trend effect", side = 1, adj = 0, at = 0.15, line = 0.5, col = "blue", font = 3)
+
+```
+
+$y_i = \beta_0 + \beta_1 MT_i + \beta_2 Phase_i + \beta_3 (MT_i-\sigma) \times Phase_i + \epsilon_i$ 
+
+## Example {.smaller}
+
+```{r ex_plm, fig.height=4, fig.width=6}
+library(scan)
+dat <- scdf(c(A = 3,2,4,5,3,2,3, B = 5,5,4,6,7,6,8,9,8,9))
+plot(dat)
+```
+
+***
+
+
+```{r}
+plm(dat)
+```
+
+## Task: Recreate the following example
+
+```{r ex_plm_ex, eval = FALSE, echo = TRUE}
+library(scan)
+dat <- scdf(c(A = 2,2,0,1,4,4,5,3,2, B = 5,4,5,5,6,4,7,6))
+plm(dat)
+```
+
+***
+
+```{r ex_plm_ex_solve, eval = TRUE}
+dat <- scdf(c(A = 2,2,0,1,4,4,5,3,2, B = 5,4,5,5,6,4,7,6))
+plm(dat)
+```
+
+## Which effects do I need? {.smaller}
+
+Axiom: Statistic models are formalizations of theoretical assumptions!
+
+- Whether you need to include a trend, level, or slope effect is a theoretical decision:
+  - What effects did prior studies a context reveal?
+  - How do you expect the learning process to evolve? Continuously? Discrete?
+
+## Setting up a restricted model {.smaller}
+
+```{r ex_plm_ex_restr, eval = TRUE}
+dat <- scdf(c(A = 2,2,0,1,2,4,3,2,2, B = 6,4,6,5,6,4,7,6))
+plm(dat)
+```
+## Restricting models with scan {.smaller}
+
+The plm function comes with three additional parameters:
+
+`trend`, `level`, and `slope`
+
+All are set to `TRUE` by default. 
+That is, all three effects are included into the model.
+
+By explicitly setting an argument to FALSE (e.g. `level = FALSE`) you drop this effect from the model.
+
+In this example:
+
+$y_i = \beta_0 + \beta_1 MT_i + \beta_2 Phase_i + \beta_3 (MT_i-\sigma) \times Phase_i + \epsilon_i$
+
+becomes
+
+$y_i = \beta_0 + \beta_1 MT_i + \beta_3 (MT_i-\sigma) \times Phase_i + \epsilon_i$
+
+
+## Dropping effects {.smaller}
+
+$y_i = \beta_0 + \beta_1 MT_i + \beta_2 Phase_i + \beta_3 (MT_i-\sigma) \times Phase_i + \epsilon_i$
+
+$y_i = \beta_0 + \beta_2 Phase_i + \epsilon_i$ (basically a t-test)
+
+```{r echo = TRUE}
+plm(dat, trend = FALSE, slope = FALSE)
+```
+
+
+## Multiple phase change models {.smaller}
+
+```{r multiphase_ex, fig.height=3, fig.width=5, echo = TRUE}
+dat <- scdf( c( A = 2,2,5,3,3,4,3,2, B = 8,6,7,7,5,7,8,7, C = 3,2,2,2,1,3,2,2) )
+plot(dat, lines = list("trend", col = "red", lwd = 2))
+```
+
+## {.smaller}
+
+```{r}
+plm(dat)
+```
+
+## Contrasting each phase to the previous phase ... {.smaller}
+
+```{r}
+plm(dat, model = "JW")
+```
+
+# Those darn contrasts ...
+
+## Dummy model
+
+The `model` argument is used to code the *dummy variable*. This *dummy variable* is used to compute the slope and level effects of the *phase* variable.\
+The *phase* variable is categorical, identifying the phase of each measurement. Typically, categorical variables are implemented by means of dummy variables. In a piecewise regression model two phase effects have to be estimated: a level effect and a slope effect. The level effect is implemented quite straight forward: for each phase beginning with the second phase a new dummy variable is created with values of zero for all measurements except the measurements of the phase in focus where values of one are set.
+
+```{r echo = FALSE}
+data.frame(phase = c(rep("A",4),rep("B",5)), values = c(3,6,4,7, 5,3,4,6,3), level_B = c(0,0,0,0,1,1,1,1,1))
+```
+
+For estimating the *slope effect* of each phase, another kind of dummy variables have to be created. Like the dummy variables for level effects the values are set to zero for all measurements except the ones of the phase in focus. Here, values start to increase with every measurement until the end of the phase.\
+Various suggestions have been made regarding the way in which these values increase. The *B&L-B* model starts with a one at the first measurement of the phase and increases with every measurement while the *H-M* model starts with a zero.
+
+```{r echo = FALSE}
+data.frame(phase = c(rep("A",4),rep("B",5)), values = c(3,6,4,7, 5,3,4,6,3), level = c(0,0,0,0,1,1,1,1,1), "slope B&L-M" = c(0,0,0,0,1,2,3,4,5), "slope H-M" = c(0,0,0,0,0,1,2,3,4),check.names = FALSE )
+```
+
+With single-case studies with more than two phases it gets a bit more complicated. Applying the a fore described models to three phases would result in a comparison of each phase to the first phase (usually the A Phase). That is, regression weights and significance tests will depict differences of each phase to the values of phase A. This might be OK depending on what you are interested in. But in a lot of cases we are more interested in analyzing the effects of a phase compared to the previous one.\
+This is achieved applying the *JW* dummy model. In this model, the dummy variable for the level effect is set to zero for all phases preceding the phase in focus and set to one for all remaining measurements. Similar, the dummy variable for the slope effect is set to zero for all phases preceding the one in focus and starts with one for the first measurement of the target phase and increases until the last measurement of the case.
+
+```{r echo = FALSE}
+data.frame(
+  phase = c(rep("A", 4), rep("B", 5), rep("C", 5)), 
+  values =  c(3,6,4,7, 5,3,4,6,3, 7,5,6,4,8), 
+  level_B = c(0,0,0,0, 1,1,1,1,1, 1,1,1,1,1), 
+  level_C = c(0,0,0,0, 0,0,0,0,0, 1,1,1,1,1), 
+  slope_B = c(0,0,0,0, 1,2,3,4,5, 6,7,8,9,10), 
+  slope_C = c(0,0,0,0, 0,0,0,0,0, 1,2,3,4,5))
+```
+
+
+# Understanding regression coefficients
+
+# Extending the regression model
+
+# Multivariate models
+
+# Multilevel models
+
+# Cross-level predictors
+
+
