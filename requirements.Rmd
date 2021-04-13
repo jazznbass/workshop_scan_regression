@@ -4,7 +4,7 @@ title: "Requirements"
 
 All the demonstrations and exercises will be conducted within **R**, the package **scan,** and **RStudio**. So please make sure you bring a computer with those three programs running.
 
-To take full advantage of the course, open RStudio and start the `scan` library so can can switch between your Zoom app and RStudio if needed.
+To take full advantage of the course, open RStudio and start the `scan` library so you can switch between your Zoom app and RStudio if needed.
 
 We will be working with the current CRAN version of scan (0.51). Don't forget to update.
 
