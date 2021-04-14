@@ -5,6 +5,10 @@ navbar:
   right:
     - text: "Requirements"
       href: requirements.html
+    - text: "Presentation slides"
+      href: _slides.html
+    - text: "Scan Book"
+      href: https://jazznbass.github.io/scan-Book/
     - text: "About"
       href: about.html
 output:

@@ -1,0 +1,3904 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workshop   Single-Case Regression Analyses</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Workshop <br> Single-Case Regression Analyses',
+                        useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                        favIcon: '_slides_files/logo.png',
+              },
+
+      // Author information
+      presenters: [
+            {
+        name:  'Jürgen Wilbert' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <script src="site_libs/header-attrs-2.7.4/header-attrs.js"></script>
+  <link href="site_libs/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="site_libs/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="site_libs/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="site_libs/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/slide-deck.js"></script>
+  <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    summary {
+      display: list-item;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+/* https://github.com/ropensci/plotly/pull/524#issuecomment-468142578 */
+slide:not(.current) .plotly.html-widget{
+  display: block;
+}
+
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            pre > code.sourceCode { white-space: pre; position: relative; }
+            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span:empty { height: 1.2em; }
+            code.sourceCode > span { color: inherit; text-decoration: inherit; }
+            div.sourceCode { margin: 1em 0; }
+            pre.sourceCode { margin: 0; }
+            @media screen {
+            div.sourceCode { overflow: auto; }
+            }
+            @media print {
+            pre > code.sourceCode { white-space: pre-wrap; }
+            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+            }
+            pre.numberSource code
+              { counter-reset: source-line 0; }
+            pre.numberSource code > span
+              { position: relative; left: -4em; counter-increment: source-line; }
+            pre.numberSource code > span > a:first-child::before
+              { content: counter(source-line);
+                position: relative; left: -1em; text-align: right; vertical-align: baseline;
+                border: none; display: inline-block;
+                -webkit-touch-callout: none; -webkit-user-select: none;
+                -khtml-user-select: none; -moz-user-select: none;
+                -ms-user-select: none; user-select: none;
+                padding: 0 4px; width: 4em;
+                color: #aaaaaa;
+              }
+            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+            div.sourceCode
+              {   }
+            @media screen {
+            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+            }
+            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+            code span.at { color: #7d9029; } /* Attribute */
+            code span.bn { color: #40a070; } /* BaseN */
+            code span.bu { } /* BuiltIn */
+            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+            code span.ch { color: #4070a0; } /* Char */
+            code span.cn { color: #880000; } /* Constant */
+            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+            code span.dt { color: #902000; } /* DataType */
+            code span.dv { color: #40a070; } /* DecVal */
+            code span.er { color: #ff0000; font-weight: bold; } /* Error */
+            code span.ex { } /* Extension */
+            code span.fl { color: #40a070; } /* Float */
+            code span.fu { color: #06287e; } /* Function */
+            code span.im { } /* Import */
+            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+            code span.op { color: #666666; } /* Operator */
+            code span.ot { color: #007020; } /* Other */
+            code span.pp { color: #bc7a00; } /* Preprocessor */
+            code span.sc { color: #4070a0; } /* SpecialChar */
+            code span.ss { color: #bb6688; } /* SpecialString */
+            code span.st { color: #4070a0; } /* String */
+            code span.va { color: #19177c; } /* Variable */
+            code span.vs { color: #4070a0; } /* VerbatimString */
+            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+        
+    slides > slide:not(.nobackground):before {
+      font-size: 12pt;
+      content: "";
+      position: absolute;
+      bottom: 20px;
+      left: 60px;
+      background: url(_slides_files/logo.png) no-repeat 0 50%;
+      -webkit-background-size: 30px 30px;
+      -moz-background-size: 30px 30px;
+      -o-background-size: 30px 30px;
+      background-size: 30px 30px;
+      padding-left: 40px;
+      height: 30px;
+      line-height: 1.9;
+    }
+  </style>
+
+  <link rel="stylesheet" href="styles_slides.css" type="text/css" />
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <aside class="gdbar"><img src="_slides_files/logo.png"></aside>
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+            <p style="margin-top: 6px; margin-left: -2px;">Version: 14 April 2021<br><br>- arrow keys: move through slides <br>- f: toggle full-screen</p>
+          </hgroup>
+  </slide>
+
+<slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>My general perspective on <br> single-case data</h2></hgroup><article  id="my-general-perspective-on-single-case-data" class="smaller ">
+
+</article></slide><slide class=""><hgroup><h2>Statistics is modeling the world</h2></hgroup><article  id="statistics-is-modeling-the-world" class="smaller ">
+
+<ul class = 'build'>
+<li><p>Statistical models are &ldquo;translations&rdquo; of (scientific) hypotheses and entities.</p></li>
+<li><p>The formulation of the correct model is a crucial and insightful process.</p></li>
+<li><p>When we have a &ldquo;good&rdquo; statistical model we can draw valid conclusions.</p></li>
+<li><p>Single-case data are … &ldquo;just&rdquo; data.</p></li>
+<li><p>We don’t need a new statistic for analyzing single-case data.</p></li>
+<li><p>We &ldquo;just&rdquo; need good models.</p></li>
+</ul>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>A basic model</h2></hgroup><article  id="a-basic-model" class="smaller ">
+
+</article></slide><slide class=""><hgroup><h2>Component 1: The intercept</h2></hgroup><article  id="component-1-the-intercept" class="smaller ">
+
+<p><img src="_slides_files/figure-html/figure_plm_intercept-1.png" width="576" /></p>
+
+<p>\(y_i = \beta_0\)</p>
+
+</article></slide><slide class=""><hgroup><h2>Component 2: Trend effect</h2></hgroup><article  id="component-2-trend-effect" class="smaller ">
+
+<p><img src="_slides_files/figure-html/figure_trend-1.png" width="576" /></p>
+
+<p>\(y_i = \beta_1 MT_i\)</p>
+
+</article></slide><slide class=""><hgroup><h2>Component 3: Level effect</h2></hgroup><article  id="component-3-level-effect" class="smaller ">
+
+<p><img src="_slides_files/figure-html/figure_level-1.png" width="576" /></p>
+
+<p>\(y_i = \beta_2 Phase_i\)</p>
+
+</article></slide><slide class=""><hgroup><h2>Component 4: Slope effect</h2></hgroup><article  id="component-4-slope-effect" class="smaller ">
+
+<p><img src="_slides_files/figure-html/figure_slope-1.png" width="576" /></p>
+
+<p>\(y_i = \beta_3 (MT_i-\sigma) \times Phase_i\)<br/>\(\sigma\) := MT at which Phase B starts minus one (Berry &amp; Lewis-Beck)<br/>—— Alternative: \(\sigma\) := MT at which Phase B starts (Huitema &amp; McKean)</p>
+
+</article></slide><slide class=""><hgroup><h2>Component 5: Error/Residual</h2></hgroup><article  id="component-5-errorresidual" class="smaller ">
+
+<p><img src="_slides_files/figure-html/figure_error-1.png" width="576" /></p>
+
+<p>\(y_i = \epsilon_i\)</p>
+
+</article></slide><slide class=""><hgroup><h2>The full model</h2></hgroup><article  id="the-full-model" class="smaller ">
+
+<p><img src="_slides_files/figure-html/figure_plm-1.png" width="576" /></p>
+
+<p>\(y_i = \beta_0 + \beta_1 MT_i + \beta_2 Phase_i + \beta_3 (MT_i-\sigma) \times Phase_i + \epsilon_i\)</p>
+
+</article></slide><slide class=""><hgroup><h2>Example: First visualize the data</h2></hgroup><article  id="example-first-visualize-the-data" class="smaller ">
+
+<p><img src="_slides_files/figure-html/ex_plm-1.png" width="576" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Second: Describe the data</h2></hgroup><article  id="second-describe-the-data" class="smaller ">
+
+<pre >Describe Single-Case Data
+
+Design:  A B 
+
+        Case1
+    n.A     7
+    n.B    10
+  mis.A     0
+  mis.B     0
+
+        Case1
+    m.A  3.14
+    m.B  6.70
+   md.A  3.00
+   md.B  6.50
+   sd.A  1.07
+   sd.B  1.77
+  mad.A  1.48
+  mad.B  2.22
+  min.A  2.00
+  min.B  4.00
+  max.A  5.00
+  max.B  9.00
+trend.A -0.04
+trend.B  0.53</pre>
+
+</article></slide><slide class=""><hgroup><h2>Third: Fit a statistical model</h2></hgroup><article  id="third-fit-a-statistical-model" class="smaller ">
+
+<pre >Piecewise Regression Analysis
+
+Dummy model:  B&amp;L-B 
+
+Fitted a gaussian distribution.
+F(3, 13) = 27.14; p = 0.000; R² = 0.862; Adjusted R² = 0.831
+
+                   B   2.5% 97.5%    SE      t     p    ΔR²
+Intercept      3.286  1.695 4.876 0.811  4.049 0.001       
+Trend mt      -0.036 -0.391 0.320 0.181 -0.197 0.847 0.0004
+Level phase B  0.764 -1.051 2.580 0.926  0.825 0.424 0.0072
+Slope phase B  0.563  0.151 0.975 0.210  2.681 0.019 0.0761
+
+Autocorrelations of the residuals
+ lag    cr
+   1 -0.04
+   2 -0.67
+   3  0.09
+
+Formula: values ~ 1 + mt + phaseB + interB</pre>
+
+</article></slide><slide class=""><hgroup><h2>Task: Recreate the following example</h2></hgroup><article  id="task-recreate-the-following-example" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>library(scan)
+dat &lt;- scdf(c(A = 2,2,0,1,4,3,2,3,2, B = 3,4,5,5,6,7,7,8))
+plot(dat)
+describeSC(dat)
+plm(dat)</pre>
+
+</article></slide><slide class=""><hgroup><h2>Task: <code>plot(dat)</code></h2></hgroup><article  id="task-plotdat" class="smaller ">
+
+<p><img src="_slides_files/figure-html/ex_plm_ex_solve-1.png" width="576" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Task: <code>describeSC(dat)</code></h2></hgroup><article  id="task-describescdat" class="smaller ">
+
+<pre >Describe Single-Case Data
+
+Design:  A B 
+
+        Case1
+    n.A     9
+    n.B     8
+  mis.A     0
+  mis.B     0
+
+        Case1
+    m.A  2.11
+    m.B  5.62
+   md.A  2.00
+   md.B  5.50
+   sd.A  1.17
+   sd.B  1.69
+  mad.A  1.48
+  mad.B  2.22
+  min.A  0.00
+  min.B  3.00
+  max.A  4.00
+  max.B  8.00
+trend.A  0.15
+trend.B  0.68</pre>
+
+</article></slide><slide class=""><hgroup><h2>Task: <code>plm(dat)</code></h2></hgroup><article  id="task-plmdat" class="smaller ">
+
+<pre >Piecewise Regression Analysis
+
+Dummy model:  B&amp;L-B 
+
+Fitted a gaussian distribution.
+F(3, 13) = 31.39; p = 0.000; R² = 0.879; Adjusted R² = 0.851
+
+                   B   2.5% 97.5%    SE      t     p    ΔR²
+Intercept      1.361  0.108 2.615 0.640  2.128 0.053       
+Trend mt       0.150 -0.073 0.373 0.114  1.320 0.210 0.0163
+Level phase B -0.140 -1.852 1.573 0.874 -0.160 0.875 0.0002
+Slope phase B  0.529  0.181 0.876 0.177  2.984 0.011 0.0831
+
+Autocorrelations of the residuals
+ lag    cr
+   1  0.00
+   2 -0.58
+   3 -0.03
+
+Formula: values ~ 1 + mt + phaseB + interB</pre>
+
+</article></slide><slide class=""><hgroup><h2>Which effects do I need?</h2></hgroup><article  id="which-effects-do-i-need" class="smaller smaller">
+
+<p>Whether you need to include a trend, level, or slope effect is a theoretical decision:</p>
+
+<ul class = 'build'>
+<li><p>What effects did prior studies reveal?</p></li>
+<li><p>How do you expect the process to evolve?</p>
+
+<ul class = 'build'>
+<li>Learning processes are often continuously (slope effects)</li>
+<li>Medication might have an immediate full effect (level effect)</li>
+<li>Motivation and attention effects of an intervention are also immediate (level effect)</li>
+</ul></li>
+<li><p>Do you expect a continuous change independent of the intervention? (trend effect)</p>
+
+<ul class = 'build'>
+<li>participants get familiar with the test material</li>
+<li>patients’ symptoms mitigate or increase with time</li>
+<li>children mature</li>
+<li>students get additional support outside the classroom</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Setting up a restricted model</h2></hgroup><article  id="setting-up-a-restricted-model" class="smaller smaller">
+
+<pre >Piecewise Regression Analysis
+
+Dummy model:  B&amp;L-B 
+
+Fitted a gaussian distribution.
+F(3, 13) = 14.53; p = 0.000; R² = 0.770; Adjusted R² = 0.717
+
+                   B   2.5% 97.5%    SE      t     p    ΔR²
+Intercept      1.250 -0.332 2.832 0.807  1.548 0.146       
+Trend mt       0.150 -0.131 0.431 0.143  1.046 0.315 0.0193
+Level phase B  2.364  0.203 4.526 1.103  2.144 0.052 0.0812
+Slope phase B -0.031 -0.469 0.407 0.224 -0.138 0.892 0.0003
+
+Autocorrelations of the residuals
+ lag    cr
+   1 -0.21
+   2 -0.08
+   3 -0.45
+
+Formula: values ~ 1 + mt + phaseB + interB</pre>
+
+</article></slide><slide class=""><hgroup><h2>Restricting models with scan</h2></hgroup><article  id="restricting-models-with-scan" class="smaller smaller">
+
+<p>The plm function comes with three additional parameters:</p>
+
+<p><code>trend</code>, <code>level</code>, and <code>slope</code></p>
+
+<p>All are set to <code>TRUE</code> by default. That is, all three effects are included into the model.</p>
+
+<p>By explicitly setting an argument to FALSE (e.g. <code>level = FALSE</code>) you drop this effect from the model.</p>
+
+<p>In this example:</p>
+
+<p>\(y_i = \beta_0 + \beta_1 MT_i + \beta_2 Phase_i + \beta_3 (MT_i-\sigma) \times Phase_i + \epsilon_i\)</p>
+
+<p>becomes</p>
+
+<p>\(y_i = \beta_0 + \beta_1 MT_i + \beta_3 (MT_i-\sigma) \times Phase_i + \epsilon_i\)</p>
+
+</article></slide><slide class=""><hgroup><h2>Dropping effects</h2></hgroup><article  id="dropping-effects" class="smaller smaller">
+
+<p>\(y_i = \beta_0 + \beta_1 MT_i + \beta_2 Phase_i + \beta_3 (MT_i-\sigma) \times Phase_i + \epsilon_i\)</p>
+
+<p>\(y_i = \beta_0 + \beta_2 Phase_i + \epsilon_i\) (basically a t-test)</p>
+
+<pre class = 'prettyprint lang-r'>plm(dat, trend = FALSE, slope = FALSE)</pre>
+
+<pre >Piecewise Regression Analysis
+
+Dummy model:  B&amp;L-B 
+
+Fitted a gaussian distribution.
+F(1, 15) = 43.24; p = 0.000; R² = 0.742; Adjusted R² = 0.725
+
+                B  2.5% 97.5%    SE     t p    ΔR²
+Intercept     2.0 1.284 2.716 0.365 5.477 0       
+Level phase B 3.5 2.457 4.543 0.532 6.575 0 0.7424
+
+Autocorrelations of the residuals
+ lag    cr
+   1 -0.01
+   2  0.00
+   3 -0.37
+
+Formula: values ~ 1 + phaseB</pre>
+
+</article></slide><slide class=""><hgroup><h2>Task</h2></hgroup><article  id="task" class="smaller ">
+
+<p>Take the previous data example …</p>
+
+<pre class = 'prettyprint lang-r'>dat &lt;- scdf(c(A = 2,2,0,1,4,3,2,3,2, B = 3,4,5,5,6,7,7,8))</pre>
+
+<p>and recalculate a plm model without a level effect.</p>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
+
+<pre class = 'prettyprint lang-r'>plm(dat, level = FALSE)</pre>
+
+<pre >Piecewise Regression Analysis
+
+Dummy model:  B&amp;L-B 
+
+Fitted a gaussian distribution.
+F(2, 14) = 50.60; p = 0.000; R² = 0.878; Adjusted R² = 0.861
+
+                  B   2.5% 97.5%    SE     t     p    ΔR²
+Intercept     1.393  0.242 2.543 0.587 2.373 0.033       
+Trend mt      0.141 -0.043 0.324 0.094 1.501 0.155 0.0196
+Slope phase B 0.523  0.195 0.851 0.167 3.125 0.007 0.0848
+
+Autocorrelations of the residuals
+ lag    cr
+   1  0.01
+   2 -0.58
+   3 -0.02
+
+Formula: values ~ 1 + mt + interB</pre>
+
+</article></slide><slide class=""><hgroup><h2>Multiple phase change models</h2></hgroup><article  id="multiple-phase-change-models" class="smaller build">
+
+<p><img src="_slides_files/figure-html/multiphase_ex-1.png" width="480" /></p>
+
+<p>What is your hypothesis here?</p>
+
+<ol class = 'build'>
+<li>An increase in phase B compared to A and a decrease in phase E compared to B or</li>
+<li>An increase in phase B compared to A and an increase in phase E compared to A</li>
+</ol>
+
+<p>it depends …</p>
+
+</article></slide><slide class=""><hgroup><h2>Contrasts</h2></hgroup><article  id="contrasts" class="smaller ">
+
+<p>Contrasts are model settings that define which levels of a categorical variable are compared in a model.</p>
+
+<p>In single-case models the phase variable is such a categorical variable.</p>
+
+<p>The level-effect and the slope-effect in a model depend on the setting of the contrasts.</p>
+
+<p>Here we will learn about two contrast settings:</p>
+
+<ol class = 'build'>
+<li>Compare all phases to the first phase.</li>
+<li>Compare all phases to the preceding phase.</li>
+</ol>
+
+</article></slide><slide class=""><hgroup><h2>Dummy variables</h2></hgroup><article  id="dummy-variables" class="smaller ">
+
+<ul class = 'build'>
+<li>Categorical predictor variables are recoded in regression analyses.</li>
+<li>Each category level becomes a &ldquo;dummy&rdquo; variable comprising a series of 0s and 1s
+
+<ul class = 'build'>
+<li>! more complex values are possible but not discussed here</li>
+<li>! when an intercept is included, a reference category is not included, these aspects are also not discussed here</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Two contrast models (it gets a bit complicated)</h2></hgroup><article  id="two-contrast-models-it-gets-a-bit-complicated" class="smaller ">
+
+<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+phase
+
+</th>
+
+<th style="text-align:right;">
+
+mt
+
+</th>
+
+<th style="text-align:right;">
+
+values
+
+</th>
+
+<th style="text-align:right;">
+
+level_B
+
+</th>
+
+<th style="text-align:right;">
+
+level_C
+
+</th>
+
+<th style="text-align:right;">
+
+slope_B
+
+</th>
+
+<th style="text-align:right;">
+
+slope_C
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+A
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+A
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+A
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+A
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+B
+
+</td>
+
+<td style="text-align:right;">
+
+5
+
+</td>
+
+<td style="text-align:right;">
+
+5
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+B
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+B
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+B
+
+</td>
+
+<td style="text-align:right;">
+
+8
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+C
+
+</td>
+
+<td style="text-align:right;">
+
+9
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+C
+
+</td>
+
+<td style="text-align:right;">
+
+10
+
+</td>
+
+<td style="text-align:right;">
+
+5
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+C
+
+</td>
+
+<td style="text-align:right;">
+
+11
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+C
+
+</td>
+
+<td style="text-align:right;">
+
+12
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+phase
+
+</th>
+
+<th style="text-align:right;">
+
+mt
+
+</th>
+
+<th style="text-align:right;">
+
+values
+
+</th>
+
+<th style="text-align:right;">
+
+level_B
+
+</th>
+
+<th style="text-align:right;">
+
+level_C
+
+</th>
+
+<th style="text-align:right;">
+
+slope_B
+
+</th>
+
+<th style="text-align:right;">
+
+slope_C
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+A
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+A
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+A
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+A
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+B
+
+</td>
+
+<td style="text-align:right;">
+
+5
+
+</td>
+
+<td style="text-align:right;">
+
+5
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+B
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+B
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+B
+
+</td>
+
+<td style="text-align:right;">
+
+8
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+C
+
+</td>
+
+<td style="text-align:right;">
+
+9
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+5
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+C
+
+</td>
+
+<td style="text-align:right;">
+
+10
+
+</td>
+
+<td style="text-align:right;">
+
+5
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+C
+
+</td>
+
+<td style="text-align:right;">
+
+11
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+C
+
+</td>
+
+<td style="text-align:right;">
+
+12
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+8
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</article></slide><slide class=""><hgroup><h2>Two contrasts models in <code>scan</code></h2></hgroup><article  id="two-contrasts-models-in-scan" class="smaller ">
+
+<p>The <code>plm</code> function has an argument <code>model</code> (default <code>model = &quot;B&amp;L-B&quot;</code>)</p>
+
+<p><code>model = &quot;B&amp;L-B&quot;</code> will set contrasts for each phase against phase A.</p>
+
+<p><code>model = &quot;JW&quot;</code> will set contrasts for each phase against its preceding phase.</p>
+
+<p>Example:</p>
+
+<p><code>plm(case, model = &quot;JW&quot;)</code></p>
+
+</article></slide><slide class=""><hgroup><h2>An example</h2></hgroup><article  id="an-example" class="smaller ">
+
+<p>Comparing phase effects to phase A</p>
+
+<pre >Piecewise Regression Analysis
+
+Dummy model:  B&amp;L-B 
+
+Fitted a gaussian distribution.
+F(5, 18) = 20.99; p = 0.000; R² = 0.854; Adjusted R² = 0.813
+
+                   B   2.5% 97.5%    SE      t     p    ΔR²
+Intercept      2.893  1.384 4.402 0.770  3.758 0.001       
+Trend mt       0.024 -0.275 0.323 0.152  0.156 0.878 0.0002
+Level phase B  3.738  1.779 5.698 1.000  3.739 0.002 0.1137
+Level phase E -0.881 -4.696 2.934 1.946 -0.453 0.656 0.0017
+Slope phase B -0.012 -0.434 0.411 0.216 -0.055 0.957 0.0000
+Slope phase E -0.083 -0.506 0.339 0.216 -0.387 0.704 0.0012
+
+Autocorrelations of the residuals
+ lag    cr
+   1 -0.26
+   2 -0.20
+   3  0.25
+
+Formula: values ~ 1 + mt + phaseB + phaseE + interB + interE</pre>
+
+</article></slide><slide class=""><hgroup><h2>An example</h2></hgroup><article  id="an-example-1" class="smaller ">
+
+<p>Comparing phase effects of each phase to the to previous phase</p>
+
+<pre >Piecewise Regression Analysis
+
+Dummy model:  JW 
+
+Fitted a gaussian distribution.
+F(5, 18) = 20.99; p = 0.000; R² = 0.854; Adjusted R² = 0.813
+
+                   B   2.5%  97.5%    SE      t     p    ΔR²
+Intercept      2.893  1.384  4.402 0.770  3.758 0.001       
+Trend mt       0.024 -0.275  0.323 0.152  0.156 0.878 0.0002
+Level phase B  3.738  1.779  5.698 1.000  3.739 0.002 0.1137
+Level phase E -4.524 -6.483 -2.564 1.000 -4.525 0.000 0.1666
+Slope phase B -0.012 -0.434  0.411 0.216 -0.055 0.957 0.0000
+Slope phase E -0.071 -0.494  0.351 0.216 -0.331 0.744 0.0009
+
+Autocorrelations of the residuals
+ lag    cr
+   1 -0.26
+   2 -0.20
+   3  0.25
+
+Formula: values ~ 1 + mt + phaseB + phaseE + interB + interE</pre>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section" class="smaller build">
+
+<p><img src="_slides_files/figure-html/unnamed-chunk-9-1.png" width="576" /></p>
+
+<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+</th>
+
+<th style="text-align:right;">
+
+Model1: Contrast to phase A
+
+</th>
+
+<th style="text-align:right;">
+
+Model2: Contrast to previous phase
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Intercept
+
+</td>
+
+<td style="text-align:right;">
+
+2.89
+
+</td>
+
+<td style="text-align:right;">
+
+2.89
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Trend
+
+</td>
+
+<td style="text-align:right;">
+
+0.02
+
+</td>
+
+<td style="text-align:right;">
+
+0.02
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Level B
+
+</td>
+
+<td style="text-align:right;">
+
+3.74
+
+</td>
+
+<td style="text-align:right;">
+
+3.74
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Level E
+
+</td>
+
+<td style="text-align:right;">
+
+-0.88
+
+</td>
+
+<td style="text-align:right;">
+
+-4.52
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Slope B
+
+</td>
+
+<td style="text-align:right;">
+
+-0.01
+
+</td>
+
+<td style="text-align:right;">
+
+-0.01
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Slope E
+
+</td>
+
+<td style="text-align:right;">
+
+-0.08
+
+</td>
+
+<td style="text-align:right;">
+
+-0.07
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<p>\(2.89 + (16 * 0.02) - 0.88 \approx 2.34\)</p>
+
+<p>\(2.89 + (8 * 0.02) + 3.74 + (8 * (0.02 - 0.01)) - 4.52 \approx 2.34\)</p>
+
+</article></slide><slide class=""><hgroup><h2>Task</h2></hgroup><article  id="task-1" class="smaller ">
+
+<p>Create the following example dataset</p>
+
+<pre class = 'prettyprint lang-r'>case &lt;- scdf( c(A1 = 2,3,1,2,3,2, B1 = 6,6,5,7,7,5, A2 = 3,2,2,3,1,3, B2 = 9,8,9,10,8,9))
+plot(case, lines = list(&quot;mean&quot;, col = &quot;red&quot;, lwd = 2))</pre>
+
+<p><img src="_slides_files/figure-html/unnamed-chunk-10-1.png" width="480" /></p>
+
+<p>Drop the slope effect from the model and contrast each phase to the previous one.</p>
+
+</article></slide><slide class=""><hgroup><h2>Task solution</h2></hgroup><article  id="task-solution" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>plm(case, model = &quot;JW&quot;, slope = FALSE)</pre>
+
+<pre >Piecewise Regression Analysis
+
+Dummy model:  JW 
+
+Fitted a gaussian distribution.
+F(4, 19) = 67.35; p = 0.000; R² = 0.934; Adjusted R² = 0.920
+
+                    B   2.5%  97.5%    SE      t p    ΔR²
+Intercept       2.167  1.219  3.114 0.483  4.481 0       
+Trend mt        0.000 -0.194  0.194 0.099  0.000 1 0.0000
+Level phase B1  3.833  2.341  5.326 0.762  5.034 0 0.0879
+Level phase A2 -3.667 -5.159 -2.174 0.762 -4.815 0 0.0804
+Level phase B2  6.500  5.007  7.993 0.762  8.535 0 0.2526
+
+Autocorrelations of the residuals
+ lag    cr
+   1 -0.47
+   2 -0.24
+   3  0.44
+
+Formula: values ~ 1 + mt + phaseB1 + phaseA2 + phaseB2</pre>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Extending the regression model</h2></hgroup><article  id="extending-the-regression-model" class="smaller ">
+
+</article></slide><slide class=""><hgroup><h2>Adding additonal variables</h2></hgroup><article  id="adding-additonal-variables" class="smaller ">
+
+<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="text-align:right;">
+
+mt
+
+</th>
+
+<th style="text-align:left;">
+
+phase
+
+</th>
+
+<th style="text-align:right;">
+
+mood
+
+</th>
+
+<th style="text-align:right;">
+
+sleep
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:left;">
+
+A
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:left;">
+
+A
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:left;">
+
+A
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+5
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+<td style="text-align:left;">
+
+A
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+5
+
+</td>
+
+<td style="text-align:left;">
+
+A
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:left;">
+
+A
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+5
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+<td style="text-align:left;">
+
+B
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+8
+
+</td>
+
+<td style="text-align:left;">
+
+B
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+9
+
+</td>
+
+<td style="text-align:left;">
+
+B
+
+</td>
+
+<td style="text-align:right;">
+
+5
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+10
+
+</td>
+
+<td style="text-align:left;">
+
+B
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+11
+
+</td>
+
+<td style="text-align:left;">
+
+B
+
+</td>
+
+<td style="text-align:right;">
+
+5
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+12
+
+</td>
+
+<td style="text-align:left;">
+
+B
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:right;">
+
+5
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+13
+
+</td>
+
+<td style="text-align:left;">
+
+B
+
+</td>
+
+<td style="text-align:right;">
+
+5
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+14
+
+</td>
+
+<td style="text-align:left;">
+
+B
+
+</td>
+
+<td style="text-align:right;">
+
+8
+
+</td>
+
+<td style="text-align:right;">
+
+8
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<p>\(mood_i = \beta_0 + \beta_1 mt_i + \beta_2 phase_i + \beta_3 (mt_i-6) \times phase_i + \beta_4 sleep + \epsilon_i\)</p>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-1" class="smaller ">
+
+<pre >Piecewise Regression Analysis
+
+Dummy model:  B&amp;L-B 
+
+Fitted a gaussian distribution.
+F(3, 10) = 10.80; p = 0.002; R² = 0.764; Adjusted R² = 0.693
+
+                   B   2.5% 97.5%    SE      t     p    ΔR²
+Intercept      2.667  0.526 4.807 1.092  2.442 0.035       
+Trend mt      -0.143 -0.692 0.407 0.280 -0.509 0.622 0.0061
+Level phase B  3.619  1.174 6.064 1.248  2.901 0.016 0.1984
+Slope phase B  0.214 -0.440 0.868 0.334  0.642 0.535 0.0097
+
+Autocorrelations of the residuals
+ lag    cr
+   1 -0.05
+   2 -0.05
+   3 -0.24
+
+Formula: mood ~ 1 + mt + phaseB + interB</pre>
+
+</article></slide><slide class=""><hgroup><h2>Task</h2></hgroup><article  id="task-2" class="smaller ">
+
+<p>We can update a regression model with the <code>update</code> argument of the <code>plm</code> function.</p>
+
+<p>Plesae execute the following code:</p>
+
+<pre class = 'prettyprint lang-r'>plm(case, update = .~. + sleep)</pre>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-2" class="smaller ">
+
+<pre >Piecewise Regression Analysis
+
+Dummy model:  B&amp;L-B 
+
+Fitted a gaussian distribution.
+F(4, 9) = 21.09; p = 0.000; R² = 0.904; Adjusted R² = 0.861
+
+                   B   2.5% 97.5%    SE      t     p    ΔR²
+Intercept     -0.553 -2.820 1.714 1.157 -0.478 0.644       
+Trend mt      -0.107 -0.478 0.263 0.189 -0.568 0.584 0.0035
+Level phase B  2.956  1.269 4.642 0.861  3.434 0.007 0.1263
+Slope phase B  0.135 -0.308 0.578 0.226  0.596 0.566 0.0038
+sleep          0.619  0.283 0.955 0.172  3.608 0.006 0.1394
+
+Autocorrelations of the residuals
+ lag    cr
+   1 -0.49
+   2  0.26
+   3 -0.26
+
+Formula: mood ~ mt + phaseB + interB + sleep</pre>
+
+</article></slide><slide class=""><hgroup><h2>Autocorrelated residuals <br> (much ado about nothing?)</h2></hgroup><article  id="autocorrelated-residuals-much-ado-about-nothing" class="smaller ">
+
+<p><img src="_slides_files/figure-html/unnamed-chunk-16-1.png" width="576" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Autocorrelated residuals</h2></hgroup><article  id="autocorrelated-residuals" class="smaller ">
+
+<p>The <code>autocorr()</code> function takes a <code>lag</code> argument and provides auto-correlations of the dependent variable for each phase and across all phases.</p>
+
+<pre class = 'prettyprint lang-r'>autocorr(case, lag = 3)</pre>
+
+<pre >Autocorrelations
+
+              case phase lag_1 lag_2 lag_3
+ Autocorr. example     A -0.47  0.33 -0.57
+ Autocorr. example     B -0.46  0.50 -0.43
+ Autocorr. example   all  0.08  0.61 -0.10</pre>
+
+</article></slide><slide class=""><hgroup><h2>Autocorrelated residuals</h2></hgroup><article  id="autocorrelated-residuals-1" class="smaller ">
+
+<p>The <code>plm()</code> gives information on the autocorrealtion of the residuals up to lag 3</p>
+
+<pre >Piecewise Regression Analysis
+
+Dummy model:  B&amp;L-B 
+
+Fitted a gaussian distribution.
+F(3, 14) = 2.89; p = 0.073; R² = 0.383; Adjusted R² = 0.250
+
+                   B   2.5% 97.5%    SE      t     p    ΔR²
+Intercept      2.036  0.013 4.058 1.032  1.973 0.069       
+Trend mt      -0.036 -0.436 0.365 0.204 -0.175 0.864 0.0013
+Level phase B  2.317 -0.123 4.756 1.245  1.861 0.084 0.1527
+Slope phase B -0.031 -0.523 0.461 0.251 -0.123 0.904 0.0007
+
+Autocorrelations of the residuals
+ lag    cr
+   1 -0.56
+   2  0.53
+   3 -0.57
+
+Formula: values ~ 1 + mt + phaseB + interB</pre>
+
+</article></slide><slide class=""><hgroup><h2>Controlling autoregression</h2></hgroup><article  id="controlling-autoregression" class="smaller ">
+
+<p>The <code>AR</code> argument of the <code>plm()</code> function allows for modeling autocorrelated residuals up to a provided lag.</p>
+
+<p><code>plm(case)</code></p>
+
+<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+</th>
+
+<th style="text-align:right;">
+
+Estimate
+
+</th>
+
+<th style="text-align:right;">
+
+Std. Error
+
+</th>
+
+<th style="text-align:right;">
+
+t value
+
+</th>
+
+<th style="text-align:right;">
+
+Pr(&gt;|t|)
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Intercept
+
+</td>
+
+<td style="text-align:right;">
+
+2.0357143
+
+</td>
+
+<td style="text-align:right;">
+
+1.0319277
+
+</td>
+
+<td style="text-align:right;">
+
+1.9727295
+
+</td>
+
+<td style="text-align:right;">
+
+0.0686083
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Trend
+
+</td>
+
+<td style="text-align:right;">
+
+-0.0357143
+
+</td>
+
+<td style="text-align:right;">
+
+0.2043521
+
+</td>
+
+<td style="text-align:right;">
+
+-0.1747683
+
+</td>
+
+<td style="text-align:right;">
+
+0.8637639
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Level B
+
+</td>
+
+<td style="text-align:right;">
+
+2.3166667
+
+</td>
+
+<td style="text-align:right;">
+
+1.2447042
+
+</td>
+
+<td style="text-align:right;">
+
+1.8612186
+
+</td>
+
+<td style="text-align:right;">
+
+0.0838416
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Slope B
+
+</td>
+
+<td style="text-align:right;">
+
+-0.0309524
+
+</td>
+
+<td style="text-align:right;">
+
+0.2510365
+
+</td>
+
+<td style="text-align:right;">
+
+-0.1232983
+
+</td>
+
+<td style="text-align:right;">
+
+0.9036235
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<p><code>plm(case, AR = 3)</code></p>
+
+<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+</th>
+
+<th style="text-align:right;">
+
+Value
+
+</th>
+
+<th style="text-align:right;">
+
+Std.Error
+
+</th>
+
+<th style="text-align:right;">
+
+t-value
+
+</th>
+
+<th style="text-align:right;">
+
+p-value
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Intercept
+
+</td>
+
+<td style="text-align:right;">
+
+2.446834
+
+</td>
+
+<td style="text-align:right;">
+
+0.5981378
+
+</td>
+
+<td style="text-align:right;">
+
+4.0907529
+
+</td>
+
+<td style="text-align:right;">
+
+0.0011019
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Trend
+
+</td>
+
+<td style="text-align:right;">
+
+-0.138445
+
+</td>
+
+<td style="text-align:right;">
+
+0.1216436
+
+</td>
+
+<td style="text-align:right;">
+
+-1.1381192
+
+</td>
+
+<td style="text-align:right;">
+
+0.2741733
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Level B
+
+</td>
+
+<td style="text-align:right;">
+
+3.044013
+
+</td>
+
+<td style="text-align:right;">
+
+0.7525916
+
+</td>
+
+<td style="text-align:right;">
+
+4.0447079
+
+</td>
+
+<td style="text-align:right;">
+
+0.0012057
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Slope B
+
+</td>
+
+<td style="text-align:right;">
+
+0.027227
+
+</td>
+
+<td style="text-align:right;">
+
+0.1362534
+
+</td>
+
+<td style="text-align:right;">
+
+0.1998261
+
+</td>
+
+<td style="text-align:right;">
+
+0.8444900
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Multilevel models</h2></hgroup><article  id="multilevel-models" class="smaller ">
+
+</article></slide><slide class=""><hgroup><h2>Why multilevel analyzes of single-cases?</h2></hgroup><article  id="why-multilevel-analyzes-of-single-cases" class="smaller ">
+
+<ul class = 'build'>
+<li>Reporting aggregated effects of multi-baseline designs (increasing external validity)</li>
+<li>Controlling for differences between individuals at the start of the investigations (random intercept / ICCs)</li>
+<li>Quantifying individual differences in response to a treatment (random slopes)</li>
+<li>Investigating and modeling variables that explain individual response differences (cross-level Interactions)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Hierarchical piecewise linear model</h2></hgroup><article  id="hierarchical-piecewise-linear-model" class="smaller centered">
+
+<img width="86%" src='images/hplm.png' title=''/>
+
+</article></slide><slide class=""><hgroup><h2>Hierarchical piecewise linear model</h2></hgroup><article  id="hierarchical-piecewise-linear-model-1" class="smaller build">
+
+<p>The <code>hplm()</code> function is an extension of the <code>plm()</code> function taking many of its parameters and allowing to analyze multiple cases at once:</p>
+
+<ul class = 'build'>
+<li><code>trend</code>, <code>level</code>, and <code>slope</code> arguments</li>
+<li><code>update.fixed</code> for extending the regression model (fixed part)</li>
+<li><code>model</code> for defining the contrasts</li>
+</ul>
+
+<p>with some additional arguments for multilevel models.</p>
+
+<p>Type <code>?hplm</code> to open a help page.</p>
+
+</article></slide><slide class=""><hgroup><h2>Example: overall effects</h2></hgroup><article  id="example-overall-effects" class="smaller ">
+
+<p>Example dataset <code>GruenkeWilbert2014</code></p>
+
+<p><img src="_slides_files/figure-html/unnamed-chunk-20-1.png" width="576" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Task</h2></hgroup><article  id="task-3" class="smaller ">
+
+<p>Replicate the following code to get an overview of the <code>GruenkeWilbert2014</code> dataset</p>
+
+<pre class = 'prettyprint lang-r'>summary(GruenkeWilbert2014)
+describeSC(GruenkeWilbert2014)</pre>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-3" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>summary(GruenkeWilbert2014)</pre>
+
+<pre >#A single-case data frame with 6 cases
+
+       Measurements Design
+Anton            18    A B
+Bob              18    A B
+Paul             18    A B
+Robert           18    A B
+Sam              18    A B
+Tim              18    A B
+
+Variable names:
+mt &lt;measurement-time variable&gt;
+score &lt;dependent variable&gt;
+phase &lt;phase variable&gt;
+
+
+Note:  Data from an intervention study on text comprehension. Gruenke, M., Wilbert, J., &amp; Stegemann-Calder, K. (2013). Analyzing the effects of story mapping on the reading comprehension of children with low intellectual abilities. Learning Disabilities: A Contemporary Journal, 11(2), 51-64.
+Author of data:  Matthias Gruenke and Juergen Wilbert </pre>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-4" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>describeSC(GruenkeWilbert2014)</pre>
+
+<pre >Describe Single-Case Data
+
+Design:  A B 
+
+        Anton Bob Paul Robert Sam Tim
+    n.A     4   7    6      8   5   4
+    n.B    14  11   12     10  13  14
+  mis.A     0   0    0      0   0   0
+  mis.B     0   0    0      0   0   0
+
+        Anton   Bob  Paul Robert   Sam   Tim
+    m.A  5.00  3.00  3.83   4.12  4.60  3.00
+    m.B  9.14  8.82  8.83   8.90  9.08  9.00
+   md.A  5.00  3.00  4.00   4.00  5.00  3.00
+   md.B  9.00  9.00  9.00   9.00  9.00  9.00
+   sd.A  0.82  0.82  0.75   0.83  0.55  0.82
+   sd.B  0.77  0.87  0.72   0.99  0.86  0.96
+  mad.A  0.74  1.48  0.74   1.48  0.00  0.74
+  mad.B  1.48  0.00  0.74   1.48  1.48  1.48
+  min.A  4.00  2.00  3.00   3.00  4.00  2.00
+  min.B  8.00  7.00  8.00   7.00  8.00  7.00
+  max.A  6.00  4.00  5.00   5.00  5.00  4.00
+  max.B 10.00 10.00 10.00  10.00 10.00 10.00
+trend.A -0.40  0.04 -0.26  -0.06  0.10 -0.60
+trend.B  0.03  0.04  0.02  -0.14  0.03  0.00
+
+Note. The following variables were used in this analysis:
+      &#39;score&#39; as dependent variable, &#39;phase&#39; as phase ,and &#39;mt&#39; as measurement time.</pre>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-5" class="smaller ">
+
+<pre >Hierarchical Piecewise Linear Regression
+
+Estimation method ML 
+Slope estimation method: B&amp;L-B 
+6 Cases
+
+ICC = 0.001; L = 0.0; p = 0.953
+
+Fixed effects (score ~ 1 + mt + phaseB + interB)
+
+                   B    SE df      t     p
+Intercept      4.169 0.260 99 16.042 0.000
+Trend mt      -0.081 0.059 99 -1.373 0.173
+Level phase B  5.208 0.300 99 17.343 0.000
+Slope phase B  0.087 0.062 99  1.393 0.167
+
+Random effects (~1 | case)
+
+          EstimateSD
+Intercept      0.149
+Residual       0.866</pre>
+
+</article></slide><slide class=""><hgroup><h2>Example: Different responses between subjects</h2></hgroup><article  id="example-different-responses-between-subjects" class="smaller ">
+
+<p>Example dataset <code>Leidig2018</code></p>
+
+<p>35 cases with up to 108 measurements (AB-Design, effect of a &ldquo;good behavior game&rdquo; on academic engagement and disruptive behavior)</p>
+
+<p><img src="_slides_files/figure-html/unnamed-chunk-23-1.png" width="576" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Academic engagement</h2></hgroup><article  id="academic-engagement" class="smaller ">
+
+<pre >Hierarchical Piecewise Linear Regression
+
+Estimation method ML 
+Slope estimation method: B&amp;L-B 
+35 Cases
+
+ICC = 0.344; L = 875.4; p = 0.000
+
+Fixed effects (academic_engagement ~ 1 + mt + phaseB + interB)
+
+                   B    SE   df      t     p
+Intercept      3.042 0.125 2376 24.281 0.000
+Trend mt      -0.004 0.004 2376 -0.966 0.334
+Level phase B  0.730 0.067 2376 10.823 0.000
+Slope phase B  0.008 0.004 2376  2.095 0.036
+
+Random effects (~1 | case)
+
+          EstimateSD
+Intercept      0.680
+Residual       0.784</pre>
+
+</article></slide><slide class=""><hgroup><h2>Disruptive behavior</h2></hgroup><article  id="disruptive-behavior" class="smaller ">
+
+<pre >Hierarchical Piecewise Linear Regression
+
+Estimation method ML 
+Slope estimation method: B&amp;L-B 
+35 Cases
+
+ICC = 0.311; L = 759.2; p = 0.000
+
+Fixed effects (disruptive_behavior ~ 1 + mt + phaseB + interB)
+
+                   B    SE   df       t p
+Intercept      1.267 0.098 2349  12.927 0
+Trend mt       0.024 0.003 2349   7.689 0
+Level phase B -1.327 0.056 2349 -23.606 0
+Slope phase B -0.025 0.003 2349  -7.802 0
+
+Random effects (~1 | case)
+
+          EstimateSD
+Intercept      0.525
+Residual       0.655</pre>
+
+</article></slide><slide class=""><hgroup><h2>Task</h2></hgroup><article  id="task-4" class="smaller ">
+
+<p>Take the <code>Leidig2018</code> dataset and calculate an <code>hplm</code> model.</p>
+
+<p>Choose <code>disruptive_behavior</code> as the dependent variable (<code>dvar = &quot;disruptive_behavior&quot;</code>)</p>
+
+<p>Add random slopes to the regression model (<code>random.slopes = TRUE</code>) and likelihood ratio tests (<code>lr.test = TRUE</code>)</p>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-6" class="smaller ">
+
+<pre >Warning: Using formula(x) is deprecated when x is a character vector of length &gt; 1.
+  Consider formula(paste(x, collapse = &quot; &quot;)) instead.</pre>
+
+<pre >Hierarchical Piecewise Linear Regression
+
+Estimation method ML 
+Slope estimation method: B&amp;L-B 
+35 Cases
+
+ICC = 0.311; L = 759.2; p = 0.000
+
+Fixed effects (disruptive_behavior ~ 1 + mt + phaseB + interB)
+
+                   B    SE   df      t     p
+Intercept      1.493 0.128 2349 11.631 0.000
+Trend mt       0.014 0.004 2349  3.189 0.001
+Level phase B -1.286 0.147 2349 -8.764 0.000
+Slope phase B -0.013 0.004 2349 -3.175 0.002
+
+Random effects (~1 + mt + phaseB + interB | case)
+
+              EstimateSD      L df     p
+Intercept          0.710 210.92  4 0.000
+Trend mt           0.015  12.90  4 0.012
+Level phase B      0.810 138.84  4 0.000
+Slope phase B      0.015  10.43  4 0.034
+Residual           0.592     NA NA    NA</pre>
+
+</article></slide><slide class=""><hgroup><h2>Cross-level predictors</h2></hgroup><article  id="cross-level-predictors" class="smaller build">
+
+<ul class = 'build'>
+<li><p>We found a significant variance in the slope and the level effects between subjects</p></li>
+<li><p>Can we explain these differences by means of attributes of the indivudals?</p></li>
+<li><p>The <code>Leidig2018</code> dataset has an accompanying dataset with information on each subject <code>Leidig2018_l2</code>:</p></li>
+</ul>
+
+<pre > [1] &quot;class&quot;                 &quot;case&quot;                  &quot;gender&quot;               
+ [4] &quot;migration&quot;             &quot;first_language_german&quot; &quot;SDQ_TOTAL&quot;            
+ [7] &quot;SDQ_EXTERNALIZING&quot;     &quot;SDQ_INTERNALIZING&quot;     &quot;ITRF_TOTAL&quot;           
+[10] &quot;ITRF_ACADEMIC&quot;         &quot;ITRF_BEHAVIOR&quot;        </pre>
+
+<div class="kable-table">
+<table>
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+class
+
+</th>
+
+<th style="text-align:left;">
+
+case
+
+</th>
+
+<th style="text-align:right;">
+
+gender
+
+</th>
+
+<th style="text-align:right;">
+
+migration
+
+</th>
+
+<th style="text-align:right;">
+
+first_language_german
+
+</th>
+
+<th style="text-align:right;">
+
+SDQ_TOTAL
+
+</th>
+
+<th style="text-align:right;">
+
+SDQ_EXTERNALIZING
+
+</th>
+
+<th style="text-align:right;">
+
+SDQ_INTERNALIZING
+
+</th>
+
+<th style="text-align:right;">
+
+ITRF_TOTAL
+
+</th>
+
+<th style="text-align:right;">
+
+ITRF_ACADEMIC
+
+</th>
+
+<th style="text-align:right;">
+
+ITRF_BEHAVIOR
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+1a
+
+</td>
+
+<td style="text-align:left;">
+
+1a1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+10
+
+</td>
+
+<td style="text-align:right;">
+
+9
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+11
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+1a
+
+</td>
+
+<td style="text-align:left;">
+
+1a2
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+11
+
+</td>
+
+<td style="text-align:right;">
+
+11
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+21
+
+</td>
+
+<td style="text-align:right;">
+
+10
+
+</td>
+
+<td style="text-align:right;">
+
+11
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+1a
+
+</td>
+
+<td style="text-align:left;">
+
+1a3
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+18
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+17
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+1a
+
+</td>
+
+<td style="text-align:left;">
+
+1a4
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+8
+
+</td>
+
+<td style="text-align:right;">
+
+5
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+14
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+1a
+
+</td>
+
+<td style="text-align:left;">
+
+1a5
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+8
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+13
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+<td style="text-align:right;">
+
+9
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+2a
+
+</td>
+
+<td style="text-align:left;">
+
+2a1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+9
+
+</td>
+
+<td style="text-align:right;">
+
+8
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+9
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+2a
+
+</td>
+
+<td style="text-align:left;">
+
+2a2
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+16
+
+</td>
+
+<td style="text-align:right;">
+
+16
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+2a
+
+</td>
+
+<td style="text-align:left;">
+
+2a3
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:right;">
+
+16
+
+</td>
+
+<td style="text-align:right;">
+
+13
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+23
+
+</td>
+
+<td style="text-align:right;">
+
+14
+
+</td>
+
+<td style="text-align:right;">
+
+9
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table></div>
+
+</article></slide><slide class=""><hgroup><h2>Adding an L2 dataset to the <code>hplm()</code> function</h2></hgroup><article  id="adding-an-l2-dataset-to-the-hplm-function" class="smaller ">
+
+<ul class = 'build'>
+<li>An l2 dataset contains information on each case of the single-case dataframe (scdf).</li>
+<li>An l2 dataset must have a variable named <code>case</code> with the casenames/id.</li>
+<li>All cases in the scdf must have a casename/id.</li>
+<li>The <code>data.l2</code> argument is set accoding to the name of the l2 dataset.
+
+<ul class = 'build'>
+<li><code>hplm(Leidig2018, data.l2 = Leidig2018_l2)</code></li>
+</ul></li>
+<li>The <code>update.fixed</code> argument must be set to include the l2 variables of interest.
+
+<ul class = 'build'>
+<li><code>hplm(Leidig2018, data.l2 = Leidig2018_l2, update.fixed = .~. + SDQ_EXTERNALIZING * phaseB)</code></li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Task</h2></hgroup><article  id="task-5" class="smaller ">
+
+<p>What effect does externalizing behavior have on the intervention strength on disruptive behavior?</p>
+
+<p>Code and execute the following model.</p>
+
+<p>Note: the <code>scale</code> function is needed to center the predictor variable (necessary in multilevel models)</p>
+
+<pre class = 'prettyprint lang-r'>hplm(
+  Leidig2018, 
+  data.l2 = Leidig2018_l2, 
+  update.fixed = .~. + scale(SDQ_EXTERNALIZING) * phaseB + scale(SDQ_EXTERNALIZING) * interB, 
+  dvar = &quot;disruptive_behavior&quot;
+)</pre>
+
+</article></slide><slide class=""><hgroup><h2>Task</h2></hgroup><article  id="task-6" class="smaller ">
+
+<pre >Hierarchical Piecewise Linear Regression
+
+Estimation method ML 
+Slope estimation method: B&amp;L-B 
+35 Cases
+
+ICC = 0.311; L = 759.2; p = 0.000
+
+Fixed effects (disruptive_behavior ~ mt + phaseB + interB + scale(SDQ_EXTERNALIZING) +     phaseB:scale(SDQ_EXTERNALIZING) + interB:scale(SDQ_EXTERNALIZING))
+
+                                            B    SE   df       t     p
+Intercept                               1.319 0.095 2347  13.951 0.000
+Trend mt                                0.020 0.003 2347   6.375 0.000
+Level phase B                          -1.306 0.056 2347 -23.457 0.000
+Slope phase B                          -0.020 0.003 2347  -6.396 0.000
+scale(SDQ_EXTERNALIZING)                0.307 0.090   33   3.397 0.002
+Level phase B:scale(SDQ_EXTERNALIZING) -0.202 0.043 2347  -4.702 0.000
+Slope phase B:scale(SDQ_EXTERNALIZING) -0.001 0.001 2347  -2.522 0.012
+
+Random effects (~1 | case)
+
+          EstimateSD
+Intercept      0.501
+Residual       0.647</pre>
+
+</article></slide><slide class=""><hgroup><h2>What comes next?</h2></hgroup><article  id="what-comes-next" class="smaller ">
+
+<p>Future developments of <code>scan</code></p>
+
+<ul class = 'build'>
+<li>Multivariate regression models (basic approach already included)</li>
+<li>Multilevel-multivariate models …</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-7" class="smaller centered">
+
+<img width="85%" src='images/thank_you.png' title=''/></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
