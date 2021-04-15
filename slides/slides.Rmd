@@ -14,8 +14,6 @@ output:
     incremental: yes
     smaller: yes
   html_document: default
-  beamer_presentation: default
-  slidy_presentation: default
 ---
 
 ```{r setup, include=FALSE}
@@ -89,7 +87,7 @@ $y_i = \beta_3 (MT_i-\sigma) \times Phase_i$\
 $\sigma$ := MT at which Phase B starts minus one (Berry & Lewis-Beck)\
 ------ Alternative: $\sigma$ := MT at which Phase B starts (Huitema & McKean)
 
-## Component 5: Error/Residual
+## Component 5: Error/Residuals
 
 ```{r figure_error, echo = FALSE, fig.height=4, fig.width=6}
 set.seed(1334)
