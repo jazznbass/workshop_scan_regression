@@ -7,6 +7,8 @@ navbar:
       href: requirements.html
     - text: "Presentation slides"
       href: slides/slides.html
+    - text: "Presentation as PDF"
+      href: slides/slides-Workshop Single-Case Regression Analyses.pdf
     - text: "Scan Book"
       href: https://jazznbass.github.io/scan-Book/
     - text: "About"
