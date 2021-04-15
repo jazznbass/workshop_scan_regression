@@ -2498,9 +2498,15 @@ Formula: mood ~ 1 + mt + phaseB + interB</pre>
 
 <p>We can update a regression model with the <code>update</code> argument of the <code>plm</code> function.</p>
 
-<p>Plesae execute the following code:</p>
+<p>Pleaae execute the following code:</p>
 
-<pre class = 'prettyprint lang-r'>plm(case, update = .~. + sleep)</pre>
+<pre class = 'prettyprint lang-r'>case &lt;- scdf(
+  mood = c(A = 2,3,2,3,1,2, B = 7,6,5,4,5,6,5,8),
+  sleep = c(4,6,5,7,3,5, 7,7,6,4,6,5,7,8),
+  dvar = &quot;mood&quot;
+)
+
+plm(case, update = .~. + sleep)</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-1" class="smaller ">
 
