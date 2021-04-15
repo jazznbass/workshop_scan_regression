@@ -190,7 +190,7 @@ slide:not(.current) .plotly.html-widget{
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Version: 14 April 2021<br><br>- arrow keys: move through slides <br>- f: toggle full-screen</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Version: 15 April 2021<br><br>- arrow keys: move through slides <br>- f: toggle full-screen</p>
           </hgroup>
   </slide>
 
@@ -249,7 +249,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p><img src="slides_files/figure-html/ex_plm-1.png" width="576" /></p>
 
-</article></slide><slide class=""><hgroup><h2>Second: Describe the data</h2></hgroup><article  id="second-describe-the-data" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Second: Describe the data</h2></hgroup><article  id="second-describe-the-data" class="smaller columns-2">
 
 <pre >Describe Single-Case Data
 
@@ -277,8 +277,11 @@ Design:  A B
 trend.A -0.04
 trend.B  0.53</pre>
 
+<p><img src="slides_files/figure-html/unnamed-chunk-2-1.png" width="384" /></p>
+
 </article></slide><slide class=""><hgroup><h2>Third: Fit a statistical model</h2></hgroup><article  id="third-fit-a-statistical-model" class="smaller ">
 
+<div style="float: left; width: 60%;">
 <pre >Piecewise Regression Analysis
 
 Dummy model:  B&amp;L-B 
@@ -298,7 +301,10 @@ Autocorrelations of the residuals
    2 -0.67
    3  0.09
 
-Formula: values ~ 1 + mt + phaseB + interB</pre>
+Formula: values ~ 1 + mt + phaseB + interB</pre></div>
+
+<div style="float: right; width: 40%;">
+<p><img src="slides_files/figure-html/unnamed-chunk-4-1.png" width="384" /></p></div>
 
 </article></slide><slide class=""><hgroup><h2>Task: Recreate the following example</h2></hgroup><article  id="task-recreate-the-following-example" class="smaller ">
 
@@ -526,7 +532,9 @@ Formula: values ~ 1 + mt + interB</pre>
 </ul></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Two contrast models (it gets a bit complicated)</h2></hgroup><article  id="two-contrast-models-it-gets-a-bit-complicated" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Two contrast models (it gets a bit complicated)</h2></hgroup><article  id="two-contrast-models-it-gets-a-bit-complicated" class="smaller columns-2">
+
+<h3>Contrast with A Phase</h3>
 
 <table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
 
@@ -536,7 +544,7 @@ Formula: values ~ 1 + mt + interB</pre>
 
 <th style="text-align:left;">
 
-phase
+(phase)
 
 </th>
 
@@ -602,7 +610,7 @@ A
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -614,7 +622,7 @@ A
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -648,7 +656,7 @@ A
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -660,7 +668,7 @@ A
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -694,7 +702,7 @@ A
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -706,7 +714,7 @@ A
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -740,7 +748,7 @@ A
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -752,7 +760,7 @@ A
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -786,7 +794,7 @@ B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 1
 
@@ -798,7 +806,7 @@ B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 1
 
@@ -832,7 +840,7 @@ B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 1
 
@@ -844,7 +852,7 @@ B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 2
 
@@ -878,7 +886,7 @@ B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 1
 
@@ -890,7 +898,7 @@ B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 3
 
@@ -924,7 +932,7 @@ B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 1
 
@@ -936,7 +944,7 @@ B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 4
 
@@ -970,7 +978,7 @@ C
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -982,7 +990,7 @@ C
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -1016,7 +1024,7 @@ C
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -1028,7 +1036,7 @@ C
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -1062,7 +1070,7 @@ C
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -1074,7 +1082,7 @@ C
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -1108,7 +1116,7 @@ C
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -1120,7 +1128,7 @@ C
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -1138,6 +1146,8 @@ C
 
 </table>
 
+<h3>Constrast with preceding phase</h3>
+
 <table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
 
 <thead>
@@ -1146,7 +1156,7 @@ C
 
 <th style="text-align:left;">
 
-phase
+(phase)
 
 </th>
 
@@ -1212,7 +1222,7 @@ A
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -1224,7 +1234,7 @@ A
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -1258,7 +1268,7 @@ A
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -1270,7 +1280,7 @@ A
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -1304,7 +1314,7 @@ A
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -1316,7 +1326,7 @@ A
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -1350,7 +1360,7 @@ A
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -1362,7 +1372,7 @@ A
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 0
 
@@ -1396,7 +1406,7 @@ B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 1
 
@@ -1408,7 +1418,7 @@ B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 1
 
@@ -1442,7 +1452,7 @@ B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 1
 
@@ -1454,7 +1464,7 @@ B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 2
 
@@ -1488,7 +1498,7 @@ B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 1
 
@@ -1500,7 +1510,7 @@ B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 3
 
@@ -1534,7 +1544,7 @@ B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 1
 
@@ -1546,7 +1556,7 @@ B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 4
 
@@ -1580,7 +1590,7 @@ C
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 1
 
@@ -1592,7 +1602,7 @@ C
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 5
 
@@ -1626,7 +1636,7 @@ C
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 1
 
@@ -1638,7 +1648,7 @@ C
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 6
 
@@ -1672,7 +1682,7 @@ C
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 1
 
@@ -1684,7 +1694,7 @@ C
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 7
 
@@ -1718,7 +1728,7 @@ C
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 1
 
@@ -1730,7 +1740,7 @@ C
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
 8
 
@@ -1814,11 +1824,11 @@ Autocorrelations of the residuals
 
 Formula: values ~ 1 + mt + phaseB + phaseE + interB + interE</pre>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section" class="smaller build">
+</article></slide><slide class=""><hgroup><h2>Both models are depictions of the same data!</h2></hgroup><article  id="both-models-are-depictions-of-the-same-data" class="smaller build">
 
-<p><img src="slides_files/figure-html/unnamed-chunk-9-1.png" width="576" /></p>
+<p><img src="slides_files/figure-html/unnamed-chunk-11-1.png" width="576" /></p>
 
-<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<table style="width:60%; font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;" class=" lightable-classic-2">
 
 <thead>
 
@@ -1993,7 +2003,7 @@ Slope E
 <pre class = 'prettyprint lang-r'>case &lt;- scdf( c(A1 = 2,3,1,2,3,2, B1 = 6,6,5,7,7,5, A2 = 3,2,2,3,1,3, B2 = 9,8,9,10,8,9))
 plot(case, lines = list(&quot;mean&quot;, col = &quot;red&quot;, lwd = 2))</pre>
 
-<p><img src="slides_files/figure-html/unnamed-chunk-10-1.png" width="480" /></p>
+<p><img src="slides_files/figure-html/unnamed-chunk-12-1.png" width="480" /></p>
 
 <p>Drop the slope effect from the model and contrast each phase to the previous one.</p>
 
@@ -2027,7 +2037,7 @@ Formula: values ~ 1 + mt + phaseB1 + phaseA2 + phaseB2</pre>
 
 </article></slide><slide class=""><hgroup><h2>Adding additonal variables</h2></hgroup><article  id="adding-additonal-variables" class="smaller ">
 
-<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<table style="width:60%; font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;" class=" lightable-classic-2">
 
 <thead>
 
@@ -2461,7 +2471,7 @@ B
 
 <p>\(mood_i = \beta_0 + \beta_1 mt_i + \beta_2 phase_i + \beta_3 (mt_i-6) \times phase_i + \beta_4 sleep + \epsilon_i\)</p>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-1" class="smaller ">
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section" class="smaller ">
 
 <pre >Piecewise Regression Analysis
 
@@ -2492,7 +2502,7 @@ Formula: mood ~ 1 + mt + phaseB + interB</pre>
 
 <pre class = 'prettyprint lang-r'>plm(case, update = .~. + sleep)</pre>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-2" class="smaller ">
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-1" class="smaller ">
 
 <pre >Piecewise Regression Analysis
 
@@ -2518,7 +2528,7 @@ Formula: mood ~ mt + phaseB + interB + sleep</pre>
 
 </article></slide><slide class=""><hgroup><h2>Autocorrelated residuals <br> (much ado about nothing?)</h2></hgroup><article  id="autocorrelated-residuals-much-ado-about-nothing" class="smaller ">
 
-<p><img src="slides_files/figure-html/unnamed-chunk-16-1.png" width="576" /></p>
+<p><img src="slides_files/figure-html/unnamed-chunk-18-1.png" width="576" /></p>
 
 </article></slide><slide class=""><hgroup><h2>Autocorrelated residuals</h2></hgroup><article  id="autocorrelated-residuals" class="smaller ">
 
@@ -2564,7 +2574,7 @@ Formula: values ~ 1 + mt + phaseB + interB</pre>
 
 <p><code>plm(case)</code></p>
 
-<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<table style="width:60%; font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;" class=" lightable-classic-2">
 
 <thead>
 
@@ -2576,25 +2586,25 @@ Formula: values ~ 1 + mt + phaseB + interB</pre>
 
 <th style="text-align:right;">
 
-Estimate
+B
 
 </th>
 
 <th style="text-align:right;">
 
-Std. Error
+se
 
 </th>
 
 <th style="text-align:right;">
 
-t value
+t
 
 </th>
 
 <th style="text-align:right;">
 
-Pr(&gt;|t|)
+p
 
 </th>
 
@@ -2614,25 +2624,25 @@ Intercept
 
 <td style="text-align:right;">
 
-2.0357143
+2.036
 
 </td>
 
 <td style="text-align:right;">
 
-1.0319277
+1.032
 
 </td>
 
 <td style="text-align:right;">
 
-1.9727295
+1.973
 
 </td>
 
 <td style="text-align:right;">
 
-0.0686083
+0.069
 
 </td>
 
@@ -2648,25 +2658,25 @@ Trend
 
 <td style="text-align:right;">
 
--0.0357143
+-0.036
 
 </td>
 
 <td style="text-align:right;">
 
-0.2043521
+0.204
 
 </td>
 
 <td style="text-align:right;">
 
--0.1747683
+-0.175
 
 </td>
 
 <td style="text-align:right;">
 
-0.8637639
+0.864
 
 </td>
 
@@ -2674,33 +2684,33 @@ Trend
 
 <tr>
 
-<td style="text-align:left;">
+<td style="text-align:left;background-color: lightyellow !important;">
 
 Level B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
-2.3166667
-
-</td>
-
-<td style="text-align:right;">
-
-1.2447042
+2.317
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
-1.8612186
+1.245
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
-0.0838416
+1.861
+
+</td>
+
+<td style="text-align:right;background-color: lightyellow !important;">
+
+0.084
 
 </td>
 
@@ -2716,25 +2726,25 @@ Slope B
 
 <td style="text-align:right;">
 
--0.0309524
+-0.031
 
 </td>
 
 <td style="text-align:right;">
 
-0.2510365
+0.251
 
 </td>
 
 <td style="text-align:right;">
 
--0.1232983
+-0.123
 
 </td>
 
 <td style="text-align:right;">
 
-0.9036235
+0.904
 
 </td>
 
@@ -2746,7 +2756,7 @@ Slope B
 
 <p><code>plm(case, AR = 3)</code></p>
 
-<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<table style="width:60%; font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;" class=" lightable-classic-2">
 
 <thead>
 
@@ -2758,25 +2768,25 @@ Slope B
 
 <th style="text-align:right;">
 
-Value
+B
 
 </th>
 
 <th style="text-align:right;">
 
-Std.Error
+se
 
 </th>
 
 <th style="text-align:right;">
 
-t-value
+t
 
 </th>
 
 <th style="text-align:right;">
 
-p-value
+p
 
 </th>
 
@@ -2796,25 +2806,25 @@ Intercept
 
 <td style="text-align:right;">
 
-2.446834
+2.447
 
 </td>
 
 <td style="text-align:right;">
 
-0.5981378
+0.598
 
 </td>
 
 <td style="text-align:right;">
 
-4.0907529
+4.091
 
 </td>
 
 <td style="text-align:right;">
 
-0.0011019
+0.001
 
 </td>
 
@@ -2830,25 +2840,25 @@ Trend
 
 <td style="text-align:right;">
 
--0.138445
+-0.138
 
 </td>
 
 <td style="text-align:right;">
 
-0.1216436
+0.122
 
 </td>
 
 <td style="text-align:right;">
 
--1.1381192
+-1.138
 
 </td>
 
 <td style="text-align:right;">
 
-0.2741733
+0.274
 
 </td>
 
@@ -2856,33 +2866,33 @@ Trend
 
 <tr>
 
-<td style="text-align:left;">
+<td style="text-align:left;background-color: lightyellow !important;">
 
 Level B
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
-3.044013
-
-</td>
-
-<td style="text-align:right;">
-
-0.7525916
+3.044
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
-4.0447079
+0.753
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:right;background-color: lightyellow !important;">
 
-0.0012057
+4.045
+
+</td>
+
+<td style="text-align:right;background-color: lightyellow !important;">
+
+0.001
 
 </td>
 
@@ -2898,25 +2908,25 @@ Slope B
 
 <td style="text-align:right;">
 
-0.027227
+0.027
 
 </td>
 
 <td style="text-align:right;">
 
-0.1362534
+0.136
 
 </td>
 
 <td style="text-align:right;">
 
-0.1998261
+0.200
 
 </td>
 
 <td style="text-align:right;">
 
-0.8444900
+0.844
 
 </td>
 
@@ -2959,7 +2969,7 @@ Slope B
 
 <p>Example dataset <code>GruenkeWilbert2014</code></p>
 
-<p><img src="slides_files/figure-html/unnamed-chunk-20-1.png" width="576" /></p>
+<p><img src="slides_files/figure-html/unnamed-chunk-22-1.png" width="576" /></p>
 
 </article></slide><slide class=""><hgroup><h2>Task</h2></hgroup><article  id="task-3" class="smaller ">
 
@@ -2968,7 +2978,7 @@ Slope B
 <pre class = 'prettyprint lang-r'>summary(GruenkeWilbert2014)
 describeSC(GruenkeWilbert2014)</pre>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-3" class="smaller ">
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-2" class="smaller ">
 
 <pre class = 'prettyprint lang-r'>summary(GruenkeWilbert2014)</pre>
 
@@ -2991,7 +3001,7 @@ phase &lt;phase variable&gt;
 Note:  Data from an intervention study on text comprehension. Gruenke, M., Wilbert, J., &amp; Stegemann-Calder, K. (2013). Analyzing the effects of story mapping on the reading comprehension of children with low intellectual abilities. Learning Disabilities: A Contemporary Journal, 11(2), 51-64.
 Author of data:  Matthias Gruenke and Juergen Wilbert </pre>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-4" class="smaller ">
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-3" class="smaller ">
 
 <pre class = 'prettyprint lang-r'>describeSC(GruenkeWilbert2014)</pre>
 
@@ -3024,7 +3034,7 @@ trend.B  0.03  0.04  0.02  -0.14  0.03  0.00
 Note. The following variables were used in this analysis:
       &#39;score&#39; as dependent variable, &#39;phase&#39; as phase ,and &#39;mt&#39; as measurement time.</pre>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-5" class="smaller ">
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-4" class="smaller ">
 
 <pre >Hierarchical Piecewise Linear Regression
 
@@ -3054,7 +3064,7 @@ Residual       0.866</pre>
 
 <p>35 cases with up to 108 measurements (AB-Design, effect of a &ldquo;good behavior game&rdquo; on academic engagement and disruptive behavior)</p>
 
-<p><img src="slides_files/figure-html/unnamed-chunk-23-1.png" width="576" /></p>
+<p><img src="slides_files/figure-html/unnamed-chunk-25-1.png" width="576" /></p>
 
 </article></slide><slide class=""><hgroup><h2>Academic engagement</h2></hgroup><article  id="academic-engagement" class="smaller ">
 
@@ -3112,10 +3122,7 @@ Residual       0.655</pre>
 
 <p>Add random slopes to the regression model (<code>random.slopes = TRUE</code>) and likelihood ratio tests (<code>lr.test = TRUE</code>)</p>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-6" class="smaller ">
-
-<pre >Warning: Using formula(x) is deprecated when x is a character vector of length &gt; 1.
-  Consider formula(paste(x, collapse = &quot; &quot;)) instead.</pre>
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-5" class="smaller ">
 
 <pre >Hierarchical Piecewise Linear Regression
 
@@ -3150,10 +3157,7 @@ Residual           0.592     NA NA    NA</pre>
 <li><p>The <code>Leidig2018</code> dataset has an accompanying dataset with information on each subject <code>Leidig2018_l2</code>:</p></li>
 </ul>
 
-<pre > [1] &quot;class&quot;                 &quot;case&quot;                  &quot;gender&quot;               
- [4] &quot;migration&quot;             &quot;first_language_german&quot; &quot;SDQ_TOTAL&quot;            
- [7] &quot;SDQ_EXTERNALIZING&quot;     &quot;SDQ_INTERNALIZING&quot;     &quot;ITRF_TOTAL&quot;           
-[10] &quot;ITRF_ACADEMIC&quot;         &quot;ITRF_BEHAVIOR&quot;        </pre>
+<pre >class, case, gender, migration, first_language_german, SDQ_TOTAL, SDQ_EXTERNALIZING, SDQ_INTERNALIZING, ITRF_TOTAL, ITRF_ACADEMIC, ITRF_BEHAVIOR</pre>
 
 <div class="kable-table">
 <table>
@@ -3867,7 +3871,7 @@ Residual       0.647</pre>
 <li>Multilevel-multivariate models …</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-7" class="smaller centered">
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-6" class="smaller centered">
 
 <img width="85%" src='images/thank_you.png' title=''/></article></slide>
 
