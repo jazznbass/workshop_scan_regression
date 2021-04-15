@@ -22,7 +22,7 @@ output:
 knitr::opts_chunk$set(
 	echo = FALSE,
 	message = FALSE,
-	warning = TRUE,
+	warning = FALSE,
 	comment = ''
 )
 
@@ -36,7 +36,6 @@ library(tidyverse)
 
 ## Statistics is modeling the world
 
-
 - Statistical models are "translations" of (scientific) hypotheses and entities.
 - The formulation of the correct model is a crucial and insightful process.
 - When we have a "good" statistical model we can draw valid conclusions.
@@ -44,7 +43,6 @@ library(tidyverse)
 - Single-case data are ... "just" data.
 - We don't need a new statistic for analyzing single-case data.
 - We "just" need good models.
-
 
 # A basic model
 
@@ -123,18 +121,36 @@ dat <- scdf(c(A = 3,2,4,5,3,2,3, B = 5,5,4,6,7,6,8,9,8,9))
 plot(dat)
 ```
 
-## Second: Describe the data
+## Second: Describe the data {.columns-2}
 
 ```{r}
 dat <- scdf(c(A = 3,2,4,5,3,2,3, B = 5,5,4,6,7,6,8,9,8,9))
 describeSC(dat)
 ```
 
+```{r fig.height=3, fig.width=4}
+dat <- scdf(c(A = 3,2,4,5,3,2,3, B = 5,5,4,6,7,6,8,9,8,9))
+plot(dat)
+```
+
 ## Third: Fit a statistical model
+
+<div style="float: left; width: 60%;">
 
 ```{r}
 plm(dat)
 ```
+
+</div>
+
+<div style="float: right; width: 40%;">
+
+```{r fig.height=3, fig.width=4}
+dat <- scdf(c(A = 3,2,4,5,3,2,3, B = 5,5,4,6,7,6,8,9,8,9))
+plot(dat)
+```
+
+</div>
 
 ## Task: Recreate the following example
 
@@ -277,30 +293,36 @@ Here we will learn about two contrast settings:
   - ! when an intercept is included, a reference category is not included, these aspects are also not discussed here
 
 
-## Two contrast models (it gets a bit complicated)
+## Two contrast models (it gets a bit complicated) {.columns-2}
+
+### Contrast with A Phase
 
 ```{r echo = FALSE}
 data.frame(
-  phase = c(rep("A", 4), rep("B", 4), rep("C", 4)), 
+  "(phase)" = c(rep("A", 4), rep("B", 4), rep("C", 4)), 
   mt      =  1:12,
   values =  c(3,6,4,7, 5,3,4,6, 7,5,6,4),
   level_B = c(0,0,0,0, 1,1,1,1, 0,0,0,0), 
   level_C = c(0,0,0,0, 0,0,0,0, 1,1,1,1), 
   slope_B = c(0,0,0,0, 1,2,3,4, 0,0,0,0), 
-  slope_C = c(0,0,0,0, 0,0,0,0, 1,2,3,4)
-  ) %>% kable() %>% kableExtra::kable_classic_2()
+  slope_C = c(0,0,0,0, 0,0,0,0, 1,2,3,4), check.names = FALSE
+  ) %>% kable() %>% kableExtra::kable_classic_2() %>%
+  column_spec(c(4,6), background = "lightyellow")
 ```
+
+### Constrast with preceding phase
 
 ```{r echo = FALSE}
 data.frame(
-  phase = c(rep("A", 4), rep("B", 4), rep("C", 4)), 
+  "(phase)" = c(rep("A", 4), rep("B", 4), rep("C", 4)), 
   mt      =  1:12,
   values =  c(3,6,4,7, 5,3,4,6, 7,5,6,4),
   level_B = c(0,0,0,0, 1,1,1,1, 1,1,1,1), 
   level_C = c(0,0,0,0, 0,0,0,0, 1,1,1,1), 
   slope_B = c(0,0,0,0, 1,2,3,4, 5,6,7,8), 
-  slope_C = c(0,0,0,0, 0,0,0,0, 1,2,3,4)
-  ) %>% kable() %>% kableExtra::kable_classic_2()
+  slope_C = c(0,0,0,0, 0,0,0,0, 1,2,3,4), check.names = FALSE
+  ) %>% kable() %>% kableExtra::kable_classic_2()%>%
+  column_spec(c(4,6), background = "lightyellow")
 ```
 
 ## Two contrasts models in `scan`
@@ -334,10 +356,11 @@ dat <- scdf( c( A = 2,2,5,3,3,4,3,2, B = 8,6,7,7,5,7,8,7, E = 3,2,2,2,1,3,2,2) )
 plm(dat, model = "JW")
 ```
 
-##  {.build}
+##  Both models are depictions of the same data! {.build}
 
 ```{r fig.height=2.5}
 plot(dat, lines = list("trend", col = "red", lwd = 2))
+text(0.74,0.2, "Calculate this point!", col = "blue")
 ```
 
 ```{r constrast_model_compare, echo = FALSE}
@@ -346,7 +369,7 @@ res_1 <- coef(plm(dat, model = "B&L-B")$full.model)
 res_2 <- coef(plm(dat, model = "JW")$full.model)
 out <- data.frame("Model1: Contrast to phase A" = res_1, "Model2: Contrast to previous phase" = res_2, check.names = FALSE) %>% round(2)
 rownames(out) <- c("Intercept", "Trend", "Level B", "Level E", "Slope B", "Slope E")
-out %>% kable() %>% kable_classic_2()
+out %>% kable(table.attr = "style='width:60%;'") %>% kable_classic_2()
 ```
 
 $2.89 + (16 * 0.02) - 0.88 \approx 2.34$ 
@@ -377,11 +400,11 @@ plm(case, model = "JW", slope = FALSE)
 ```{r}
 case <- scdf(
   mood = c(A = 2,3,2,3,1,2, B = 7,6,5,4,5,6,5,8),
-  sleep =     c(    4,6,5,7,3,5,     7,7,6,4,6,5,7,8),
+  sleep = c(    4,6,5,7,3,5,     7,7,6,4,6,5,7,8),
   dvar = "mood"
 )
 
-case[[1]] %>% relocate(mt, phase) %>% kable() %>% kable_classic_2()
+case[[1]] %>% relocate(mt, phase) %>% kable(table.attr = "style='width:60%;'") %>% kable_classic_2()
 
 ```
 
@@ -397,9 +420,15 @@ plm(case)
 
 We can update a regression model with the `update` argument of the `plm` function.
 
-Plesae execute the following code:
+Pleaae execute the following code:
 
 ```{r echo = TRUE, eval = FALSE}
+case <- scdf(
+  mood = c(A = 2,3,2,3,1,2, B = 7,6,5,4,5,6,5,8),
+  sleep = c(4,6,5,7,3,5, 7,7,6,4,6,5,7,8),
+  dvar = "mood"
+)
+
 plm(case, update = .~. + sleep)
 ```
 
@@ -443,17 +472,23 @@ The `AR` argument of the `plm()` function allows for modeling autocorrelated res
 case <- scdf( c(A = 1,3,2,3,1,2,0,3, B = 3,4,3,5,4,6,2,5,2,3))
 res_1 <- plm(case)
 res_2 <- plm(case, AR = 3)
-out <- summary(res_1$full.model)$coefficients 
+out <- as.data.frame(summary(res_1$full.model)$coefficients)
+out <- round(out,3)
+colnames(out) <- c("B", "se", "t", "p")
 rownames(out) <- c("Intercept", "Trend", "Level B", "Slope B")
-out %>% kable() %>% kable_classic_2()
+out %>% kable(table.attr = "style='width:60%;'") %>% kable_classic_2() %>%
+  row_spec(3, background = "lightyellow")
 ```
 
 `plm(case, AR = 3)`
 
 ```{r}
-out <- summary(res_2$full.model)$tTable 
+out <- as.data.frame(summary(res_2$full.model)$tTable)
+out <- round(out, 3)
 rownames(out) <- c("Intercept", "Trend", "Level B", "Slope B")
-out %>% kable() %>% kable_classic_2()
+colnames(out) <- c("B", "se", "t", "p")
+out %>% kable(table.attr = "style='width:60%;'") %>% kable_classic_2()%>%
+  row_spec(3, background = "lightyellow")
 ```
 
 # Multilevel models
@@ -550,7 +585,7 @@ Add random slopes to the regression model (`random.slopes = TRUE`) and likelihoo
 
 ## 
 
-```{r}
+```{r warning = FALSE}
 hplm(Leidig2018, dvar = "disruptive_behavior", random.slopes = TRUE, lr.test = TRUE)
 ```
 
@@ -562,7 +597,7 @@ hplm(Leidig2018, dvar = "disruptive_behavior", random.slopes = TRUE, lr.test = T
 - The `Leidig2018` dataset has an accompanying dataset with information on each subject `Leidig2018_l2`:
 
 ```{r}
-names(Leidig2018_l2)
+cat(paste0(names(Leidig2018_l2), collapse=", "))
 Leidig2018_l2[1:8,]
 ```
 
